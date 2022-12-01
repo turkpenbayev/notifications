@@ -2,14 +2,9 @@
 
 [![Build Status](https://github.com/turkpenbayev/notifications/actions/workflows/django.yml/badge.svg?branch=master)](https://github.com/turkpenbayev/notifications/actions/workflows/django.yml)
 
-
 ```sh
 docker-compose up -d --build
 ```
-
-Документация по api [http://0.0.0.0:9000/docs/](http://0.0.0.0:9000/docs/)
-
-
 ## Дополнительные задания выполнение
 1. организовать тестирование написанного кода 
 2. обеспечить автоматическую сборку/тестирование с помощью GitLab CI 
