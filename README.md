@@ -1,6 +1,6 @@
 # Сервис уведомлений
 
-[![Build Status](https://github.com/turkpenbayev/notifications/actions/workflows/django.yml/?badge.svg?branch=master)](https://github.com/turkpenbayev/notifications/actions/workflows/django.yml/?badge.svg?branch=master)
+[![Build Status](https://github.com/turkpenbayev/notifications/actions/workflows/django.yml/badge.svg?branch=master)](https://github.com/turkpenbayev/notifications/actions/workflows/django.yml/badge.svg?branch=master)
 
 
 ```sh
