@@ -3,6 +3,7 @@ from celery import shared_task
 from logging import getLogger
 
 from django.db.models import F
+from django.core.mail import send_mail
 
 from notifications.models import Message
 from notifications.utils import ActionError
@@ -32,8 +33,13 @@ def notify_client(self, message_id: int):
 
 @shared_task(bind=True)
 def notify_reporter(self):
-    reporter_phone = '77777777777'
-    reporter_text='Report about something'
-    logger.info(f'sending message to reportter {reporter_phone}')
-    make_request(str(uuid.uuid4()), reporter_phone, reporter_text)
+    send_mail(
+        'Report',
+        'Here is the message.',
+        'from@example.com',
+        ['to@example.com'],
+        fail_silently=False,
+    )
+    logger.info(f'sending message to reportter')
+    
     return 
