@@ -1,5 +1,7 @@
 # Сервис уведомлений
 
+[![Build Status](https://github.com/turkpenbayev/notifications/actions/workflows/django.yml/?badge.svg?branch=master)](https://github.com/turkpenbayev/notifications/actions/workflows/django.yml/?badge.svg?branch=master)
+
 
 ```sh
 $ docker-compose up -d --build
