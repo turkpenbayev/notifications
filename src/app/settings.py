@@ -1,5 +1,4 @@
 import os
-from celery.schedules import crontab
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -122,12 +121,6 @@ CELERY_TASK_ALWAYS_EAGER = False
 CELERY_ENABLE_UTC = True
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_ACCEPT_CONTENT = ['application/json']
-CELERY_BEAT_SCHEDULE = {
-    'notify_reporter': {
-        'task': 'notifications.tasks.notify_reporter',
-        'schedule': crontab(hour=12, minute=0)
-    }
-}
 
 
 LOGGING = {
@@ -168,3 +161,4 @@ LOGGING = {
     }
 }
 
+SERVICE_JWT_TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MzY0OTk2MTcsImlzcyI6ImZhYnJpcXVlIiwibmFtZSI6Imh0dHBzOi8vdC5tZS9GcmVlU3R5MWUifQ.EdqvfERDYCSG62G-RyCrqTMD7CPUHijkDHJn5cEJubc'

@@ -24,9 +24,9 @@ import notifications.urls
 
 schema_view = get_schema_view(
    openapi.Info(
-      title="Fabrique API",
+      title='Notify API',
       default_version='v1',
-      description="Fabrique app",
+      description='notify app',
    ),
    public=True,
    permission_classes=[permissions.AllowAny],

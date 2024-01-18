@@ -26,20 +26,6 @@ def notify_client(self, message_id: int):
         raise ActionError(f'Message does not found id={message_id}')
     logger.info(f'sending message to {message.customer_id}')
     status = make_request(message.pk, message.phone, message.text)
-    Message.objects.filter(pk=message_id).update(status=status)
-
+    message.status = status
+    message.save(update_fields=['status'])
     return
-
-
-@shared_task(bind=True)
-def notify_reporter(self):
-    send_mail(
-        'Report',
-        'Here is the message.',
-        'from@example.com',
-        ['to@example.com'],
-        fail_silently=False,
-    )
-    logger.info(f'sending message to reportter')
-    
-    return 

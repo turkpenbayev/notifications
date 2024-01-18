@@ -1,6 +1,8 @@
 import requests
 from logging import getLogger
 
+from django.conf import settings
+
 from notifications.models import Message
 
 
@@ -15,11 +17,12 @@ def make_request(message_id: int | str, phone: str, text: str) -> int:
                 'phone': phone,
                 'text': text
             }
+            logger.info(f'sending message with id {message_id}, phone: {phone}, text: {text}')
             response = session.post(
                 url=f'https://probe.fbrq.cloud/v1/send/{message_id}',
                 json=data,
                 headers={
-                    'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MDEzNDI1ODEsImlzcyI6ImZhYnJpcXVlIiwibmFtZSI6InR1cmtwZW5iYXlldiJ9.zrl13SbkhE-H22_bvUd9tDrWOIuOl1zir_QySksU_Cs'
+                    'Authorization': f'Bearer {settings.SERVICE_JWT_TOKEN}'
                 }
             )
             response.raise_for_status()

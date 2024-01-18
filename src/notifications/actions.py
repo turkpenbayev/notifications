@@ -1,10 +1,9 @@
-import pytz
 import celery
-from datetime import datetime
 from logging import getLogger
 
 from django.db import transaction
 from django.db.models import Q
+from django.utils import timezone
 
 from notifications.utils import ActionError
 from notifications.models import Customer, Message, Mailing
@@ -54,15 +53,17 @@ class SendMessages:
         customers = customers.filter(customers_filter)
 
         for customer in customers:
-            customer_time = datetime.now(pytz.timezone(customer.timezone))
+            now = timezone.now()
             eta = 0
             send_message = False
-            if mailing.start_at <= customer_time <= mailing.end_at:
+
+            if mailing.start_at <= now <= mailing.end_at:
                 eta = None
                 send_message = True
-            elif customer_time < mailing.start_at < mailing.end_at:
+            elif now < mailing.start_at < mailing.end_at:
                 eta = mailing.start_at
                 send_message = True
+
             if send_message:
                 message = Message.objects.create(
                     mailing_id=mailing_id,

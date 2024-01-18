@@ -15,6 +15,7 @@ class CustomerSerializer(serializers.ModelSerializer):
 
 
 class ListMessageSerializer(serializers.ModelSerializer):
+    status = serializers.CharField(source='get_status_display')
     class Meta:
         model = Message
         fields = ('id', 'created_at', 'status', 'customer_id')
