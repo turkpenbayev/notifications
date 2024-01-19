@@ -33,7 +33,8 @@ docker-compose up
 
 ### 4. Доступ к приложению
 
-Приложение должно быть доступно по адресу [http://localhost:8000](http://localhost:8000).
+- Приложение должно быть доступно по адресу [http://localhost:8000](http://localhost:8000).
+- админ [http://localhost:8000/admin](http://localhost:8000/admin).
 
 ## Дополнительная информация
 - Файл docker-compose.yml определяет сервисы и их конфигурации.
