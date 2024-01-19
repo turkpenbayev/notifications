@@ -122,12 +122,13 @@ class MailingViewSet(ActionSerializerViewSetMixin,
 
     @action(methods=['GET'], detail=True)
     def messages(self, request, pk=None, *args, **kwargs):
-        messages = Message.objects.filter(mailing_id=pk)
+        messages = Message.objects.select_related('customer').filter(mailing_id=pk)
         serializer = self.get_serializer(messages, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
-
-    @action(methods=['POST'], detail=True)
-    def send_messages(self, request, pk=None, *args, **kwargs):
-        logger.info(f'send message mailing_id={pk}')
-        actions.SendMessages()(mailing_id=pk)
-        return Response(status=status.HTTP_200_OK)
+    
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        mailing = serializer.save()
+        actions.SendMessages()(mailing_id=mailing.pk)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)

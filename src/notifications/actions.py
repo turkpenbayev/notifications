@@ -37,6 +37,7 @@ class RemoveCustomer:
 class SendMessages:
 
     def __call__(self, mailing_id: int) -> None:
+        logger.info(f'send message mailing_id={mailing_id}')
         try:
             mailing = Mailing.objects.get(id=mailing_id)
         except Mailing.DoesNotExist:
@@ -47,8 +48,10 @@ class SendMessages:
         if mailing.filters.phone_code:
             customers_filter = Q(phone_code=mailing.filters.phone_code)
         if mailing.filters.tags:
+            tag_filter = Q()
             for tag in mailing.filters.tags:
-                customers_filter |= Q(tag__contains=tag)
+                tag_filter |= Q(tag__contains=tag)
+            customers_filter &= tag_filter
 
         customers = customers.filter(customers_filter)
 

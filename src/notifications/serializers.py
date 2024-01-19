@@ -15,10 +15,11 @@ class CustomerSerializer(serializers.ModelSerializer):
 
 
 class ListMessageSerializer(serializers.ModelSerializer):
+    customer = CustomerSerializer()
     status = serializers.CharField(source='get_status_display')
     class Meta:
         model = Message
-        fields = ('id', 'created_at', 'status', 'customer_id')
+        fields = ('id', 'created_at', 'status', 'customer')
         read_only_fields = fields
 
 
